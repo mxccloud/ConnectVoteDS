@@ -7,7 +7,6 @@
     <meta name="description" content="Secure voter data capture application with Supabase integration">
     <meta name="theme-color" content="#007749">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
@@ -379,6 +378,16 @@
             display: none;
             z-index: 1000;
         }
+
+        .github-info {
+            background: #24292e;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #0366d6;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -393,6 +402,10 @@
             
             <div class="supabase-info">
                 <p><strong>Supabase Powered</strong> - Real-time database with secure authentication</p>
+            </div>
+
+            <div class="github-info">
+                <p><strong>Hosted on GitHub Pages</strong> - Free and reliable hosting</p>
             </div>
             
             <div class="admin-info">
@@ -456,17 +469,17 @@
         </header>
         
         <div class="container">
-            <!-- Supabase Configuration Panel (for demo purposes) -->
+            <!-- Supabase Configuration Panel -->
             <div class="config-panel">
                 <h2><i class="fas fa-database"></i> Supabase Connection</h2>
-                <p>This app is connected to a real Supabase backend. All data is stored securely in PostgreSQL.</p>
+                <p>This app is connected to your Supabase backend. All data is stored securely in PostgreSQL.</p>
                 <div class="form-group">
                     <label for="supabaseUrl">Supabase URL</label>
-                    <input type="text" id="supabaseUrl" placeholder="https://your-project.supabase.co" value="https://oyrzshsgnlyzlmtbwgli.supabase.co">
+                    <input type="text" id="supabaseUrl" placeholder="https://your-project.supabase.co" value="https://oyrzshsgnlyzlmtbwgli.supabase.co" readonly>
                 </div>
                 <div class="form-group">
                     <label for="supabaseKey">Supabase API Key</label>
-                    <input type="text" id="supabaseKey" placeholder="your-anon-key" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cnpzaHNnbmx5emxtdGJ3Z2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMDc1OTUsImV4cCI6MjA3MTg4MzU5NX0.PUMQxVsSik2RnsjOWxEEpQEMu7Bu2RZ6-kwHkUUKw6I">
+                    <input type="text" id="supabaseKey" placeholder="your-anon-key" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cnpzaHNnbmx5emxtdGJ3Z2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMDc1OTUsImV4cCI6MjA3MTg4MzU5NX0.PUMQxVsSik2RnsjOWxEEpQEMu7Bu2RZ6-kwHkUUKw6I" readonly>
                 </div>
                 <button class="btn" id="testSupabaseConnection">Test Connection</button>
             </div>
@@ -524,8 +537,6 @@
                 </div>
             </div>
             
-            <!-- Steps 2-8 would follow the same pattern -->
-            
             <!-- Step 9: Personal Aspirations -->
             <div class="step-content" id="step9">
                 <div class="card">
@@ -558,7 +569,6 @@
                     </div>
                 </div>
                 
-                <!-- Review & Submit button is correctly placed at the end of Step 9 -->
                 <div class="navigation">
                     <button class="btn btn-secondary" id="toStep8">Back</button>
                     <button class="btn btn-gold" id="toSummary">Review & Submit</button>
@@ -584,26 +594,6 @@
                         <div class="summary-item">
                             <div class="summary-label">Voting Station</div>
                             <div id="summary-station"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-card">
-                        <h3>Demographics</h3>
-                        <div class="summary-item">
-                            <div class="summary-label">Gender & Marital Status</div>
-                            <div id="summary-demographics"></div>
-                        </div>
-                        <div class="summary-item">
-                            <div class="summary-label">Household Size & Housing</div>
-                            <div id="summary-household"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-card">
-                        <h3>Personal Priorities</h3>
-                        <div class="summary-item">
-                            <div class="summary-label">Main Priority</div>
-                            <div id="summary-priority"></div>
                         </div>
                     </div>
                     
@@ -646,7 +636,7 @@
         </div>
         
         <footer>
-            <p>ConnectVote &copy; 2025 | Powered by Supabase</p>
+            <p>ConnectVote &copy; 2025 | Powered by Supabase | Hosted on GitHub Pages</p>
             <p>This information is collected for improving service delivery and community engagement</p>
         </footer>
     </div>
@@ -654,7 +644,7 @@
     <script>
         // Initialize Supabase with your provided credentials
         const SUPABASE_URL = 'https://oyrzshsgnlyzlmtbwgli.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cnpzaHNnbmx5emxtdGJ3Z2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMDc1OTUsImV4cCI6MjA3MTg4MzU5NX0.PUMQxVsSik2RnsjOWxEEpQEMu7Bu2RZ6-kwHkUUKw6I';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cnpzaHNnbmx5emxtdGJ3Z2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMDc1OTUsImV4cCI6MjA3MTg4MzU9NX0.PUMQxVsSik2RnsjOWxEEpQEMu7Bu2RZ6-kwHkUUKw6I';
         
         // Initialize Supabase client
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -757,7 +747,7 @@
             });
             
             // Show current step content
-            stepContents.forEach((content, index) => {
+            stepContents.forEach((content, index) {
                 if (index + 1 === currentStep) {
                     content.classList.add('active');
                 } else {
@@ -875,10 +865,6 @@
             
             // Navigation buttons
             document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
-            document.getElementById('toStep1').addEventListener('click', () => goToStep(1));
-            document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
-            document.getElementById('toStep2Back').addEventListener('click', () => goToStep(2));
-            document.getElementById('toStep4').addEventListener('click', () => goToStep(4));
             document.getElementById('toStep8').addEventListener('click', () => goToStep(8));
             document.getElementById('toSummary').addEventListener('click', () => {
                 goToStep(10); // Summary is step 10
