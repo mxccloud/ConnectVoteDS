@@ -405,7 +405,7 @@
             </div>
 
             <div class="github-info">
-                <p><strong>Hosted on GitHub Pages</strong> - Free and reliable hosting</p>
+                <p><strong>Hosted on GitHub Pages</strong> - Repository: ConnectVoteDS</p>
             </div>
             
             <div class="admin-info">
@@ -644,7 +644,7 @@
     <script>
         // Initialize Supabase with your provided credentials
         const SUPABASE_URL = 'https://oyrzshsgnlyzlmtbwgli.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cnpzaHNnbmx5emxtdGJ3Z2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMDc1OTUsImV4cCI6MjA3MTg4MzU9NX0.PUMQxVsSik2RnsjOWxEEpQEMu7Bu2RZ6-kwHkUUKw6I';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im95cnpzaHNnbmx5emxtdGJ3Z2xpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzMDc1OTUsImV4cCI6MjA3MTg4MzU5NX0.PUMQxVsSik2RnsjOWxEEpQEMu7Bu2RZ6-kwHkUUKw6I';
         
         // Initialize Supabase client
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -747,7 +747,7 @@
             });
             
             // Show current step content
-            stepContents.forEach((content, index) {
+            stepContents.forEach((content, index) => {
                 if (index + 1 === currentStep) {
                     content.classList.add('active');
                 } else {
