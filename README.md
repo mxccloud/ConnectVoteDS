@@ -12,7 +12,7 @@ A secure web application for capturing voter information with Supabase integrati
 
 ## Setup
 
-1. The app is connected to a Supabase backend
+1. The app is connected to a Supabase backend.
 2. Database schema needs to be set up in your Supabase project
 3. The app is ready to use at your GitHub Pages URL
 
