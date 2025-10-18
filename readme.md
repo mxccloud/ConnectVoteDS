@@ -1,6 +1,6 @@
 # ConnectVote - Voter Data Capture System
 
-A web application for capturing voter data with IEC verification integration.
+A web application for capturing voter data with IEC verification integration!.
 
 ## Features
 - Voter data capture with multi-step form
