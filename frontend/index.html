@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectVote - Voter Data Capture</title>
+    <meta name="description" content="Secure voter data capture application with Supabase integration">
+    <meta name="theme-color" content="#007749">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">
+                <i class="fas fa-vote-yea"></i>
+                <h1>ConnectVote</h1>
+                <p>Secure Voter Data Capture</p>
+            </div>
+            
+            <div class="supabase-info">
+                <p><strong>Supabase Powered</strong> - Real-time database with secure authentication</p>
+            </div>
+            
+            <div class="admin-info">
+                <p><strong>Administrator Note:</strong> User accounts must be created through the admin portal. Contact your system administrator for login credentials.</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+            
+            <button class="btn" id="loginBtn" style="width: 100%">Login</button>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Demo Credentials:<br>
+                <small>Email: <strong>field_agent1@example.com</strong> | Password: <strong>Pass123!</strong></small></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application (initially hidden) -->
+    <div id="appContainer" style="display: none;">
+        <div class="supabase-status" id="supabaseStatus">
+            <i class="fas fa-database"></i> <span id="supabaseStatusText"></span>
+        </div>
+        
+        <div class="anc-header-stripe"></div>
+        
+        <header>
+            <div class="app-bar">
+                <div class="logo">
+                    <i class="fas fa-vote-yea"></i>
+                    <span>ConnectVote</span>
+                </div>
+                <div class="user-info">
+                    <span id="currentUserName">User</span>
+                    <button class="btn btn-logout" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="step-indicator">
+                <div class="step active" data-step="1">Verification</div>
+                <div class="step" data-step="2">Demographics</div>
+                <div class="step" data-step="3">Education</div>
+                <div class="step" data-step="4">Employment</div>
+                <div class="step" data-step="5">Social</div>
+                <div class="step" data-step="6">Community</div>
+                <div class="step" data-step="7">Political</div>
+                <div class="step" data-step="8">Communication</div>
+                <div class="step" data-step="9">Aspirations</div>
+            </div>
+        </header>
+        
+        <div class="container">
+            <!-- Supabase Configuration Panel (for demo purposes) -->
+            <div class="config-panel">
+                <h2><i class="fas fa-database"></i> Supabase Connection</h2>
+                <p>This app is connected to a real Supabase backend. All data is stored securely in PostgreSQL.</p>
+                <div class="form-group">
+                    <label for="supabaseUrl">Supabase URL</label>
+                    <input type="text" id="supabaseUrl" placeholder="https://your-project.supabase.co" value="https://gujmsxxkwzhpvfdawyeu.supabase.co">
+                </div>
+                <div class="form-group">
+                    <label for="supabaseKey">Supabase API Key</label>
+                    <input type="text" id="supabaseKey" placeholder="your-anon-key" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1am1zeHhrd3pocHZmZGF3eWV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2Mzk4NTYsImV4cCI6MjA3NjIxNTg1Nn0.-eJki5EWV7RU4NoS4i6En6Pa6kIvgny9-gdYQFa9zmI">
+                </div>
+                <button class="btn" id="testSupabaseConnection">Test Connection</button>
+            </div>
+
+            <!-- Step 1: Verification -->
+            <div class="step-content active" id="step1">
+                <div class="card">
+                    <h2><i class="fas fa-id-card"></i> Voter Verification</h2>
+                    <div class="form-group">
+                        <label for="idNumber">ID Number</label>
+                        <input type="text" id="idNumber" placeholder="Enter your South African ID number">
+                    </div>
+                    <button class="btn" id="verifyBtn">
+                        <span id="verifyBtnText">Verify with IEC</span>
+                    </button>
+                </div>
+                
+                <div class="card" id="verificationResults" style="display: none;">
+                    <h2>Verification Results</h2>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="fullName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="text" id="age" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Ward</label>
+                        <input type="text" id="ward" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Voting District</label>
+                        <input type="text" id="votingDistrict" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Voting Station</label>
+                        <input type="text" id="votingStation" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Do you want to change your voting station?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="changeStation" value="yes"> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="changeStation" value="no" checked> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <div></div>
+                    <button class="btn btn-gold" id="toStep2">Continue</button>
+                </div>
+            </div>
+            
+            <!-- Steps 2-8 would follow the same pattern -->
+            
+            <!-- Step 9: Personal Aspirations -->
+            <div class="step-content" id="step9">
+                <div class="card">
+                    <h2><i class="fas fa-star"></i> Personal Aspirations</h2>
+                    
+                    <div class="form-group">
+                        <label>What is your number one personal priority right now?</label>
+                        <select id="priority">
+                            <option value="">Select your priority</option>
+                            <option value="job">Job</option>
+                            <option value="education">Education</option>
+                            <option value="business">Business support</option>
+                            <option value="housing">Housing</option>
+                            <option value="safety">Safety</option>
+                            <option value="health">Health</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Would you like to receive notifications about opportunities?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="notifications" value="yes"> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="notifications" value="no"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review & Submit button is correctly placed at the end of Step 9 -->
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep8">Back</button>
+                    <button class="btn btn-gold" id="toSummary">Review & Submit</button>
+                </div>
+            </div>
+            
+            <!-- Summary Step -->
+            <div class="step-content" id="summary">
+                <div class="card">
+                    <h2><i class="fas fa-check-circle"></i> Review Your Information</h2>
+                    <p>Please review all your information before submitting.</p>
+                    
+                    <div class="summary-card">
+                        <h3>Verification Details</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">ID Number</div>
+                            <div id="summary-id"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Full Name</div>
+                            <div id="summary-name"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Voting Station</div>
+                            <div id="summary-station"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>Demographics</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">Gender & Marital Status</div>
+                            <div id="summary-demographics"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Household Size & Housing</div>
+                            <div id="summary-household"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>Personal Priorities</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">Main Priority</div>
+                            <div id="summary-priority"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" id="consentCheck">
+                            I confirm that the information provided is accurate and consent to its use for improving service delivery.
+                        </label>
+                    </div>
+                    
+                    <button class="btn btn-gold" id="submitBtn" disabled>Submit to Supabase</button>
+                </div>
+            </div>
+            
+            <!-- Confirmation Screen -->
+            <div class="step-content" id="confirmation">
+                <div class="card" style="text-align: center;">
+                    <div style="font-size: 4rem; color: var(--anc-green);">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>Thank You!</h2>
+                    <p>Your voter profile has been successfully submitted to our secure database.</p>
+                    <p>Your information will help us better understand community needs and improve service delivery.</p>
+                    
+                    <div style="margin: 30px 0;">
+                        <button class="btn" id="downloadProfile">
+                            <i class="fas fa-download"></i> Download Profile
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-secondary" id="newEntry">
+                        <i class="fas fa-plus"></i> Start New Entry
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle"></i> <span id="notificationText"></span>
+        </div>
+        
+        <footer>
+            <p>ConnectVote &copy; 2025 | Powered by Supabase</p>
+            <p>This information is collected for improving service delivery and community engagement</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
