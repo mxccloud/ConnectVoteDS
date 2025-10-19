@@ -81,6 +81,7 @@
                 <div class="step" data-step="7">Political</div>
                 <div class="step" data-step="8">Communication</div>
                 <div class="step" data-step="9">Aspirations</div>
+                <div class="step" data-step="10">Review</div>
             </div>
         </header>
         
@@ -140,9 +141,208 @@
                 </div>
             </div>
             
-            <!-- Steps 2-8 would follow the same pattern -->
+            <!-- Step 2: Demographics -->
+            <div class="step-content" id="step2">
+                <div class="card">
+                    <h2><i class="fas fa-users"></i> Demographics</h2>
+                    
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="gender" value="male"> Male
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="gender" value="female"> Female
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="gender" value="other"> Other
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="gender" value="prefer-not-to-say"> Prefer not to say
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="maritalStatus">Marital Status</label>
+                        <select id="maritalStatus">
+                            <option value="">Select marital status</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                            <option value="cohabiting">Cohabiting</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="householdSize">Household Size</label>
+                        <input type="number" id="householdSize" placeholder="Number of people in household" min="1" max="20">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="housingType">Housing Type</label>
+                        <select id="housingType">
+                            <option value="">Select housing type</option>
+                            <option value="formal-house">Formal House</option>
+                            <option value="apartment-flat">Apartment/Flat</option>
+                            <option value="townhouse">Townhouse</option>
+                            <option value="informal-dwelling">Informal Dwelling</option>
+                            <option value="backyard-room">Backyard Room</option>
+                            <option value="rondavel">Rondavel</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep1">Back</button>
+                    <button class="btn btn-gold" id="toStep3">Continue</button>
+                </div>
+            </div>
             
-            <!-- Step 9: Personal Aspirations -->
+            <!-- Step 3: Education -->
+            <div class="step-content" id="step3">
+                <div class="card">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    
+                    <div class="form-group">
+                        <label for="educationLevel">Highest Education Level</label>
+                        <select id="educationLevel">
+                            <option value="">Select education level</option>
+                            <option value="no-formal-education">No Formal Education</option>
+                            <option value="primary">Primary School</option>
+                            <option value="some-secondary">Some Secondary</option>
+                            <option value="matric">Matric/Grade 12</option>
+                            <option value="certificate">Certificate</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="degree">Bachelor's Degree</option>
+                            <option value="honours">Honours Degree</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="doctorate">Doctorate</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Are you currently studying?</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="currentlyStudying" value="yes"> Yes
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="currentlyStudying" value="no"> No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep2Back">Back</button>
+                    <button class="btn btn-gold" id="toStep4">Continue</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Employment -->
+            <div class="step-content" id="step4">
+                <div class="card">
+                    <h2><i class="fas fa-briefcase"></i> Employment</h2>
+                    
+                    <div class="form-group">
+                        <label for="employmentStatus">Employment Status</label>
+                        <select id="employmentStatus">
+                            <option value="">Select employment status</option>
+                            <option value="employed-fulltime">Employed Full-time</option>
+                            <option value="employed-parttime">Employed Part-time</option>
+                            <option value="self-employed">Self-Employed</option>
+                            <option value="unemployed">Unemployed</option>
+                            <option value="student">Student</option>
+                            <option value="retired">Retired</option>
+                            <option value="homemaker">Homemaker</option>
+                            <option value="unable-to-work">Unable to Work</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" placeholder="Your occupation">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="industry">Industry</label>
+                        <select id="industry">
+                            <option value="">Select industry</option>
+                            <option value="agriculture">Agriculture</option>
+                            <option value="mining">Mining</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="construction">Construction</option>
+                            <option value="retail">Retail</option>
+                            <option value="transport">Transport</option>
+                            <option value="finance">Finance</option>
+                            <option value="education">Education</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="government">Government</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep3Back">Back</button>
+                    <button class="btn btn-gold" id="toStep5">Continue</button>
+                </div>
+            </div>
+            
+            <!-- Step 5-8: Placeholder steps (you can expand these later) -->
+            <div class="step-content" id="step5">
+                <div class="card">
+                    <h2><i class="fas fa-shield-alt"></i> Social Services</h2>
+                    <p>Social services information will be collected here.</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep4Back">Back</button>
+                    <button class="btn btn-gold" id="toStep6">Continue</button>
+                </div>
+            </div>
+            
+            <div class="step-content" id="step6">
+                <div class="card">
+                    <h2><i class="fas fa-hands-helping"></i> Community Involvement</h2>
+                    <p>Community involvement information will be collected here.</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep5Back">Back</button>
+                    <button class="btn btn-gold" id="toStep7">Continue</button>
+                </div>
+            </div>
+            
+            <div class="step-content" id="step7">
+                <div class="card">
+                    <h2><i class="fas fa-landmark"></i> Political Views</h2>
+                    <p>Political views information will be collected here.</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep6Back">Back</button>
+                    <button class="btn btn-gold" id="toStep8">Continue</button>
+                </div>
+            </div>
+            
+            <div class="step-content" id="step8">
+                <div class="card">
+                    <h2><i class="fas fa-comments"></i> Communication Preferences</h2>
+                    <p>Communication preferences will be collected here.</p>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="toStep7Back">Back</button>
+                    <button class="btn btn-gold" id="toStep9">Continue</button>
+                </div>
+            </div>
+            
+            <!-- Step 9: Personal Aspirations (without Review button) -->
             <div class="step-content" id="step9">
                 <div class="card">
                     <h2><i class="fas fa-star"></i> Personal Aspirations</h2>
@@ -174,14 +374,15 @@
                     </div>
                 </div>
                 
+                <!-- Only Continue button, no Review button -->
                 <div class="navigation">
                     <button class="btn btn-secondary" id="toStep8">Back</button>
-                    <button class="btn btn-gold" id="toSummary">Review & Submit</button>
+                    <button class="btn btn-gold" id="toStep10">Continue to Review</button>
                 </div>
             </div>
             
-            <!-- Summary Step -->
-            <div class="step-content" id="summary">
+            <!-- NEW Step 10: Review & Submit -->
+            <div class="step-content" id="step10">
                 <div class="card">
                     <h2><i class="fas fa-check-circle"></i> Review Your Information</h2>
                     <p>Please review all your information before submitting.</p>
@@ -197,8 +398,68 @@
                             <div id="summary-name"></div>
                         </div>
                         <div class="summary-item">
+                            <div class="summary-label">Age</div>
+                            <div id="summary-age"></div>
+                        </div>
+                        <div class="summary-item">
                             <div class="summary-label">Voting Station</div>
                             <div id="summary-station"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Change Voting Station?</div>
+                            <div id="summary-change-station"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>Demographics</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">Gender</div>
+                            <div id="summary-gender"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Marital Status</div>
+                            <div id="summary-marital"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Household Size</div>
+                            <div id="summary-household"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Housing Type</div>
+                            <div id="summary-housing"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>Education & Employment</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">Education Level</div>
+                            <div id="summary-education"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Currently Studying</div>
+                            <div id="summary-studying"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Employment Status</div>
+                            <div id="summary-employment"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Occupation</div>
+                            <div id="summary-occupation"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>Personal Priorities</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">Main Priority</div>
+                            <div id="summary-priority"></div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Receive Notifications</div>
+                            <div id="summary-notifications"></div>
                         </div>
                     </div>
                     
@@ -209,11 +470,15 @@
                         </label>
                     </div>
                     
-                    <button class="btn btn-gold" id="submitBtn" disabled>Submit to Supabase</button>
+                    <!-- Review & Submit button is now here at the end -->
+                    <div class="navigation">
+                        <button class="btn btn-secondary" id="toStep9Back">Back</button>
+                        <button class="btn btn-gold" id="submitBtn" disabled>Review & Submit to Supabase</button>
+                    </div>
                 </div>
             </div>
             
-            <!-- Confirmation Screen -->
+            <!-- Confirmation Screen (now Step 11) -->
             <div class="step-content" id="confirmation">
                 <div class="card" style="text-align: center;">
                     <div style="font-size: 4rem; color: var(--anc-green);">
