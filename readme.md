@@ -33,4 +33,5 @@ A comprehensive web application for capturing voter data with real-time IEC veri
 ### Backend (Railway)
 ```env
 
-TWO_CAPTCHA_API_KEY=your_2captcha_api_key
+TWO_CAPTCHA_API_KEY=6a618c70ab1c170d5ee4706d077cfbda
+
