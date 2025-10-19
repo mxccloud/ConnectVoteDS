@@ -1,5 +1,0 @@
-flask==2.3.3
-flask-cors==4.0.0
-selenium==4.15.0
-twocaptcha==1.0.2
-webdriver-manager==4.0.1
