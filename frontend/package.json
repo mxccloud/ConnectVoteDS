@@ -1,0 +1,11 @@
+{
+  "name": "connectvote-frontend",
+  "version": "1.0.0",
+  "description": "ConnectVote Frontend",
+  "scripts": {
+    "build": "echo 'No build step needed for static files'"
+  },
+  "static": {
+    "directory": "."
+  }
+}
