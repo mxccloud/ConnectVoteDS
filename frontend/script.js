@@ -4,7 +4,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 // Backend API URL - Will be updated after Railway deployment
 // For now, using a placeholder that will be replaced
-const BOT_API_URL = 'https://connectvote-app.up.railway.app/verify-voter';
+const BOT_API_URL = 'https://onnectVoteDS.up.railway.app/verify-voter';
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -438,4 +438,5 @@ function resetForm() {
 }
 
 // Initialize the app when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', initApp);
