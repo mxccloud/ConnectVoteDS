@@ -10,8 +10,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
-from twocaptcha import TwoCaptcha
+from twocaptcha import TwoCaptcha  # This import will work with 2captcha-python
 from dotenv import load_dotenv
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 # Load environment variables
 load_dotenv()
@@ -27,6 +29,7 @@ class VoterInfoBot:
     def __init__(self):
         self.driver = None
         self.wait = None
+        # Use the correct package name
         self.solver = TwoCaptcha(os.getenv('TWO_CAPTCHA_API_KEY', '6a618c70ab1c170d5ee4706d077cfbda'))
         self.setup_driver()
         
@@ -55,9 +58,6 @@ class VoterInfoBot:
             chrome_options.add_experimental_option('useAutomationExtension', False)
             
             # Use webdriver-manager for automatic driver management
-            from webdriver_manager.chrome import ChromeDriverManager
-            from selenium.webdriver.chrome.service import Service
-            
             service = Service(ChromeDriverManager().install())
             self.driver = webdriver.Chrome(service=service, options=chrome_options)
             
@@ -69,7 +69,8 @@ class VoterInfoBot:
         except Exception as e:
             logger.error(f"❌ Chrome driver setup failed: {e}")
             raise
-    
+
+    # [Keep all the other methods the same as before]
     def run_bot(self, id_number):
         """Main function to run the bot and extract voter information"""
         try:
