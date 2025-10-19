@@ -4,8 +4,8 @@ A comprehensive web application for capturing voter data with real-time IEC veri
 
 ## 🚀 Live Deployment
 
-- **Frontend (Vercel)**: `https://connectvote-app.vercel.app`
-- **Backend (Railway)**: `https://your-app-name.up.railway.app`
+- **Frontend (Vercel)**: `https://ConnectVoteDS.vercel.app`
+- **Backend (Railway)**: `https://ConnectVoteDS.up.railway.app`
 
 ## 🏗️ Architecture
 
@@ -32,4 +32,5 @@ A comprehensive web application for capturing voter data with real-time IEC veri
 
 ### Backend (Railway)
 ```env
+
 TWO_CAPTCHA_API_KEY=your_2captcha_api_key
