@@ -2,16 +2,15 @@
 const SUPABASE_URL = 'https://gujmsxxkwzhpvfdawyeu.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1am1zeHhrd3pocHZmZGF3eWV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA2Mzk4NTYsImV4cCI6MjA3NjIxNTg1Nn0.-eJki5EWV7RU4NoS4i6En6Pa6kIvgny9-gdYQFa9zmI';
 
-// Backend API URL - Will be updated after Railway deployment
-// For now, using a placeholder that will be replaced
+// Backend API URL - Update this after Railway deployment
 const BOT_API_URL = 'https://ConnectVoteDS.up.railway.app/verify-voter';
 
 // Initialize Supabase client
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Current step tracking
+// Current step tracking - Now 10 steps + confirmation
 let currentStep = 1;
-const totalSteps = 9;
+const totalSteps = 10;
 let currentUser = null;
 
 // DOM Elements
@@ -129,9 +128,14 @@ function updateProgress() {
 
 // Navigate to a specific step
 function goToStep(stepNumber) {
-    if (stepNumber >= 1 && stepNumber <= totalSteps + 2) {
+    if (stepNumber >= 1 && stepNumber <= totalSteps + 1) { // +1 for confirmation screen
         currentStep = stepNumber;
         updateProgress();
+        
+        // If going to review step, update the summary
+        if (stepNumber === 10) {
+            updateSummary();
+        }
     }
 }
 
@@ -320,13 +324,33 @@ function setupEventListeners() {
     // Logout button
     document.getElementById('logoutBtn').addEventListener('click', handleLogout);
     
-    // Navigation buttons
+    // Navigation buttons for all steps
     document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
+    document.getElementById('toStep1').addEventListener('click', () => goToStep(1));
+    
+    document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
+    document.getElementById('toStep2Back').addEventListener('click', () => goToStep(2));
+    
+    document.getElementById('toStep4').addEventListener('click', () => goToStep(4));
+    document.getElementById('toStep3Back').addEventListener('click', () => goToStep(3));
+    
+    document.getElementById('toStep5').addEventListener('click', () => goToStep(5));
+    document.getElementById('toStep4Back').addEventListener('click', () => goToStep(4));
+    
+    document.getElementById('toStep6').addEventListener('click', () => goToStep(6));
+    document.getElementById('toStep5Back').addEventListener('click', () => goToStep(5));
+    
+    document.getElementById('toStep7').addEventListener('click', () => goToStep(7));
+    document.getElementById('toStep6Back').addEventListener('click', () => goToStep(6));
+    
     document.getElementById('toStep8').addEventListener('click', () => goToStep(8));
-    document.getElementById('toSummary').addEventListener('click', () => {
-        goToStep(10); // Summary is step 10
-        updateSummary();
-    });
+    document.getElementById('toStep7Back').addEventListener('click', () => goToStep(7));
+    
+    document.getElementById('toStep9').addEventListener('click', () => goToStep(9));
+    document.getElementById('toStep8').addEventListener('click', () => goToStep(8));
+    
+    document.getElementById('toStep10').addEventListener('click', () => goToStep(10));
+    document.getElementById('toStep9Back').addEventListener('click', () => goToStep(9));
     
     // Verify ID button
     document.getElementById('verifyBtn').addEventListener('click', async () => {
@@ -356,7 +380,7 @@ function setupEventListeners() {
         document.getElementById('submitBtn').disabled = !this.checked;
     });
     
-    // Submit button
+    // Submit button - Now in Step 10
     document.getElementById('submitBtn').addEventListener('click', async () => {
         // Show confirmation screen
         goToStep(11);
@@ -397,7 +421,16 @@ function collectFormData() {
         voting_district: document.getElementById('votingDistrict').value,
         voting_station: document.getElementById('votingStation').value,
         change_station: document.querySelector('input[name="changeStation"]:checked')?.value || 'no',
-        priority: document.getElementById('priority').value,
+        gender: document.querySelector('input[name="gender"]:checked')?.value || 'Not specified',
+        marital_status: document.getElementById('maritalStatus').value || 'Not specified',
+        household_size: document.getElementById('householdSize').value || 'Not specified',
+        housing_type: document.getElementById('housingType').value || 'Not specified',
+        education_level: document.getElementById('educationLevel').value || 'Not specified',
+        currently_studying: document.querySelector('input[name="currentlyStudying"]:checked')?.value || 'Not specified',
+        employment_status: document.getElementById('employmentStatus').value || 'Not specified',
+        occupation: document.getElementById('occupation').value || 'Not specified',
+        industry: document.getElementById('industry').value || 'Not specified',
+        priority: document.getElementById('priority').value || 'Not specified',
         wants_notifications: document.querySelector('input[name="notifications"]:checked')?.value === 'yes',
         collected_by: currentUser.email,
         collected_at: new Date().toISOString()
@@ -406,12 +439,28 @@ function collectFormData() {
 
 // Update summary with entered data
 function updateSummary() {
-    document.getElementById('summary-id').textContent = document.getElementById('idNumber').value;
-    document.getElementById('summary-name').textContent = document.getElementById('fullName').value;
-    document.getElementById('summary-station').textContent = document.getElementById('votingStation').value;
+    // Verification Details
+    document.getElementById('summary-id').textContent = document.getElementById('idNumber').value || 'Not provided';
+    document.getElementById('summary-name').textContent = document.getElementById('fullName').value || 'Not provided';
+    document.getElementById('summary-age').textContent = document.getElementById('age').value || 'Not provided';
+    document.getElementById('summary-station').textContent = document.getElementById('votingStation').value || 'Not provided';
+    document.getElementById('summary-change-station').textContent = document.querySelector('input[name="changeStation"]:checked')?.value === 'yes' ? 'Yes' : 'No';
     
-    const priority = document.getElementById('priority').value;
-    document.getElementById('summary-priority').textContent = priority || 'Not specified';
+    // Demographics
+    document.getElementById('summary-gender').textContent = document.querySelector('input[name="gender"]:checked')?.value || 'Not specified';
+    document.getElementById('summary-marital').textContent = document.getElementById('maritalStatus').value || 'Not specified';
+    document.getElementById('summary-household').textContent = document.getElementById('householdSize').value ? document.getElementById('householdSize').value + ' people' : 'Not specified';
+    document.getElementById('summary-housing').textContent = document.getElementById('housingType').value || 'Not specified';
+    
+    // Education & Employment
+    document.getElementById('summary-education').textContent = document.getElementById('educationLevel').value || 'Not specified';
+    document.getElementById('summary-studying').textContent = document.querySelector('input[name="currentlyStudying"]:checked')?.value === 'yes' ? 'Yes' : 'No';
+    document.getElementById('summary-employment').textContent = document.getElementById('employmentStatus').value || 'Not specified';
+    document.getElementById('summary-occupation').textContent = document.getElementById('occupation').value || 'Not specified';
+    
+    // Personal Priorities
+    document.getElementById('summary-priority').textContent = document.getElementById('priority').value || 'Not specified';
+    document.getElementById('summary-notifications').textContent = document.querySelector('input[name="notifications"]:checked')?.value === 'yes' ? 'Yes' : 'No';
 }
 
 // Reset form for new entry
@@ -438,6 +487,4 @@ function resetForm() {
 }
 
 // Initialize the app when DOM is loaded
-
 document.addEventListener('DOMContentLoaded', initApp);
-
