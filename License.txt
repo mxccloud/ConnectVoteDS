@@ -1,0 +1,10 @@
+
+## Step 4: Deployment Instructions
+
+### Frontend Deployment to Vercel:
+
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Initial deployment ready"
+   git push origin main
