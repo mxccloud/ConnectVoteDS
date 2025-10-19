@@ -50,6 +50,13 @@ header {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.progress-bar {
+    height: 100%;
+    background-color: var(--anc-gold);
+    width: 10%; /* Changed from 11% to 10% for 10 steps */
+    transition: width 0.3s ease;
+}
+
 .app-bar {
     display: flex;
     justify-content: space-between;
@@ -413,4 +420,5 @@ footer {
     .card {
         padding: 15px;
     }
+
 }
